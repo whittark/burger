@@ -1,0 +1,56 @@
+<div class="main-container">
+	<img src="assets/img/burgerLogowt1.png" width="618" height="350" alt="Dream Burger: build a burger and then devour it!"/>
+
+	<div class="container">
+		<div class="centered" class="list">
+			<h2>Build Your Dream Burger</h2>
+			<form class="create-update-form" action="/" method="POST">
+			  <div class="form-group">
+			    <label for="burger">Enter the burger to build:</label>
+			    <br>
+			    <input type="text" id="burger" class="user-burgername" name="name" aria-label="Username" aria-describedby="basic-addon1">
+			  </div>
+			  <button type="submit" class="btn btn-warning">Add Burger</button>
+			</form>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="centered" class="list">
+		  <h2>Built Burgers to Devour</h2>
+		  <ul class="list-group" style="align-content: center;
+	align-content: center; ">
+		    {{#each burgers}}
+		      {{#unless this.devoured}}
+		        <li class="list-group-item list-group-item">
+		          {{this.burger_name}}
+
+		          <form action="/{{this.id}}?_method=PUT" method="POST">
+		            <input type="hidden" name="devoured" value="true">
+		            <button type="submit" class="btn btn-outline-warning">Devour it!</button>
+		          </form>
+		        </li>
+		      {{/unless}}
+		    {{/each}}
+		  </ul>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="centered" class="list">
+		  <h2 >Devoured Burgers</h2>
+		  <ul class="list-group">
+		    {{#each burgers}}
+		      {{#if this.devoured}}
+		        <li class="list-group-item list-group-item-danger">
+		          {{this.burger_name}}
+		          <form action="/{{this.id}}?_method=PUT" method="POST">
+		            <input type="hidden" name="devoured" value="false">
+		          </form>
+		        </li>
+		      {{/if}}
+		    {{/each}}
+		  </ul>
+		</div>
+	</div>
+</div>
